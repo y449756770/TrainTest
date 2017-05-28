@@ -1,0 +1,28 @@
+include ':app'
+include ':android-swift-framework'
+project(':android-swift-framework').projectDir = new File(rootDir.parent, 'android-swift-framework')
+//include ':android-swift-rv-animators'
+//project(':android-swift-rv-animators').projectDir = new File(rootDir.parent, 'android-swift-rv-animators')
+include ':android-swift-logger'
+project(':android-swift-logger').projectDir = new File(rootDir.parent, 'android-swift-logger')
+//include ':android-swift-analytics'
+//project(':android-swift-analytics').projectDir = new File(rootDir.parent, 'android-swift-analytics')
+include ':android-swift-resume'
+project(':android-swift-resume').projectDir = new File(rootDir.parent, 'android-swift-resume')
+//include ':android-swift-pickerview'
+//project(':android-swift-pickerview').projectDir = new File(rootDir.parent, 'android-swift-pickerview')
+//include ':android-swift-red-point'
+//project(':android-swift-red-point').projectDir = new File(rootDir.parent, 'android-swift-red-point')
+//include ':android-swift-router-process'
+//project(':android-swift-router-process').projectDir = new File(rootDir.parent, 'android-swift-router-pro/android-swift-router-process')
+//include ':android-swift-image'
+//project(':android-swift-image').projectDir = new File(settingsDir, '../android-swift-image')
+//include ':android-swift-commtool'
+//project(':android-swift-commtool').projectDir = new File(settingsDir, '../android-swift-commtool')
+//include ':android-swift-widget'
+//project(':android-swift-widget').projectDir = new File(settingsDir, '../android-swift-widget')
+//include ':android-swift-location'
+//project(':android-swift-location').projectDir = new File(settingsDir, '../android-swift-location')
+/*键盘*/
+//include ':android-swift-emokeyboard'
+//project(':android-swift-emokeyboard').projectDir = new File(settingsDir, '../android-swift-emokeyboard')
