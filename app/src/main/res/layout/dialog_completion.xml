@@ -1,0 +1,82 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:android_custom="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white">
+
+    <LinearLayout
+        android:id="@+id/pop"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:gravity="center"
+            android:lineSpacingMultiplier="1.2"
+            android:padding="12dp"
+            android:text="您的简历完整度为*%,\n完善简历提高HR/猎头的关注度"
+            android:textColor="@color/text_333"
+            android:textSize="16sp"/>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:gravity="center">
+
+            <com.example.incomplete.trainingtest.view.RoundProgressBar
+                android:id="@+id/roundProgressBar"
+                android:layout_width="match_parent"
+                android:layout_height="140dip"
+                android_custom:defaultTipTextColor="@color/color_orange"
+                android_custom:radius="50dip"
+                android_custom:roundColor="@color/color_ffe4c8"
+                android_custom:roundProgressColor="@color/color_f0872e"
+                android_custom:roundSecondProgressColor="@color/color_ffbd8f"
+                android_custom:roundWidth="28dip"
+                android_custom:secondProgress="65"
+                android_custom:textColor="@color/text_666"
+                android_custom:textSize="18sp"
+                android_custom:tip2TextSize="14sp"
+                android_custom:tipTextColor="@color/text_999"
+                android_custom:tipTextSize="12sp"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/edit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/orange2"
+            android:gravity="center"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            android:text="完善简历"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            android:text="取消"
+            android:textColor="@color/color_ff8b26"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+</RelativeLayout>

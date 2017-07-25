@@ -28,7 +28,7 @@ public class BinaryTree {
     }
 
     public void print() {
-        if (null!=root){
+        if (null != root) {
             root.printNode();
         }
 
@@ -71,11 +71,11 @@ public class BinaryTree {
          */
 
         public void printNode() {
-            if (null!=leftNode){
-               leftNode.printNode();
+            if (null != leftNode) {
+                leftNode.printNode();
             }
-            Log.i("nodeData",this.data+"");
-            if (null!=rightNode){
+            Log.i("nodeData", this.data + "");
+            if (null != rightNode) {
                 rightNode.printNode();
             }
 

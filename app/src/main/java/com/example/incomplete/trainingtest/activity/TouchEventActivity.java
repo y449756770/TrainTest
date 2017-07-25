@@ -9,6 +9,10 @@ import android.widget.Button;
 import com.example.incomplete.trainingtest.R;
 import com.example.incomplete.trainingtest.utiles.TouchEventUtil;
 
+/**
+ * 事件分发的测试类
+ */
+
 public class TouchEventActivity extends Activity {
 
 

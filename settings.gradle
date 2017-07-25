@@ -1,14 +1,14 @@
 include ':app'
-include ':android-swift-framework'
-project(':android-swift-framework').projectDir = new File(rootDir.parent, 'android-swift-framework')
+//include ':android-swift-framework'
+//project(':android-swift-framework').projectDir = new File(rootDir.parent, 'android-swift-framework')
 //include ':android-swift-rv-animators'
 //project(':android-swift-rv-animators').projectDir = new File(rootDir.parent, 'android-swift-rv-animators')
-include ':android-swift-logger'
-project(':android-swift-logger').projectDir = new File(rootDir.parent, 'android-swift-logger')
+//include ':android-swift-logger'
+//project(':android-swift-logger').projectDir = new File(rootDir.parent, 'android-swift-logger')
 //include ':android-swift-analytics'
 //project(':android-swift-analytics').projectDir = new File(rootDir.parent, 'android-swift-analytics')
-include ':android-swift-resume'
-project(':android-swift-resume').projectDir = new File(rootDir.parent, 'android-swift-resume')
+//include ':android-swift-resume'
+//project(':android-swift-resume').projectDir = new File(rootDir.parent, 'android-swift-resume')
 //include ':android-swift-pickerview'
 //project(':android-swift-pickerview').projectDir = new File(rootDir.parent, 'android-swift-pickerview')
 //include ':android-swift-red-point'

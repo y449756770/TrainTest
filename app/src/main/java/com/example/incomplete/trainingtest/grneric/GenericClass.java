@@ -40,7 +40,7 @@ public class GenericClass<T> {
     }
 
     /**
-     * 静态方法必须有自己的范型 ，这里的Q和类里的Q不一样
+     * 静态方法必须有自己的范型 ，这里的R和类里的Q不一样
      *
      * @param q
      * @param <R>
@@ -49,4 +49,10 @@ public class GenericClass<T> {
 
 
     }
+
+    public T showReturn(T t) {
+
+        return t;
+    }
+
 }

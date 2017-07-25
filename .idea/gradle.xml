@@ -10,9 +10,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/../android-swift-framework" />
-            <option value="$PROJECT_DIR$/../android-swift-logger" />
-            <option value="$PROJECT_DIR$/../android-swift-resume" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

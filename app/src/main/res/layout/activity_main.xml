@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.incomplete.trainingtest.MainActivity">
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/activity_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="com.example.incomplete.trainingtest.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="15dp"
             android:text="事件分发"
-            android:textSize="16sp" />
+            android:textSize="16sp"/>
 
 
         <Button
@@ -30,7 +30,7 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="15dp"
             android:text="互斥锁"
-            android:textSize="16sp" />
+            android:textSize="16sp"/>
 
         <Button
             android:id="@+id/btn_collection"
@@ -40,7 +40,7 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="15dp"
             android:text="集合"
-            android:textSize="16sp" />
+            android:textSize="16sp"/>
 
         <Button
             android:id="@+id/btn_data"
@@ -50,7 +50,7 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="15dp"
             android:text="数据结构"
-            android:textSize="16sp" />
+            android:textSize="16sp"/>
 
         <Button
             android:id="@+id/btn_leak"
@@ -60,7 +60,7 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="15dp"
             android:text="内存泄漏"
-            android:textSize="16sp" />
+            android:textSize="16sp"/>
 
         <Button
             android:id="@+id/btn_async"
@@ -70,7 +70,7 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="15dp"
             android:text="异步任务"
-            android:textSize="16sp" />
+            android:textSize="16sp"/>
 
         <Button
             android:id="@+id/btn_generic"
@@ -80,7 +80,7 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="15dp"
             android:text="范型"
-            android:textSize="16sp" />
+            android:textSize="16sp"/>
 
         <Button
             android:id="@+id/btn_recyler"
@@ -90,8 +90,29 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="15dp"
             android:text="Recyler列表"
-            android:textSize="16sp" />
+            android:textSize="16sp"/>
 
+        <Button
+            android:id="@+id/btn_rxjava"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:text="Rxjava"
+            android:textSize="16sp"/>
+
+
+
+        <Button
+            android:id="@+id/btn_dial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:text="各种自定义刻度盘"
+            android:textSize="16sp"/>
 
 
     </LinearLayout>

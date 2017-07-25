@@ -10,29 +10,30 @@ import com.example.incomplete.trainingtest.utiles.TouchEventUtil;
 
 public class TouchEventChilds extends LinearLayout {
 
-	public TouchEventChilds(Context context) {
-		super(context);
-	}
+    public TouchEventChilds(Context context) {
+        super(context);
+    }
 
-	public TouchEventChilds(Context context, AttributeSet attrs) {
-		super(context, attrs);
-	}
+    public TouchEventChilds(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
 
-	public boolean dispatchTouchEvent(MotionEvent ev) {
-		Log.e("sunzn", "TouchEventChilds | dispatchTouchEvent --> " + TouchEventUtil.getTouchAction(ev.getAction()));
-		return super.dispatchTouchEvent(ev);
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        Log.e("sunzn", "TouchEventChilds | dispatchTouchEvent --> " + TouchEventUtil.getTouchAction(ev.getAction()));
+        return super.dispatchTouchEvent(ev);
 //		return true;
-	}
+    }
 
-	public boolean onInterceptTouchEvent(MotionEvent ev) {
-		Log.i("sunzn", "TouchEventChilds | onInterceptTouchEvent --> " + TouchEventUtil.getTouchAction(ev.getAction()));
-		return super.onInterceptTouchEvent(ev);
-	}
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        Log.i("sunzn", "TouchEventChilds | onInterceptTouchEvent --> " + TouchEventUtil.getTouchAction(ev.getAction()));
+//        return super.onInterceptTouchEvent(ev);
+        return true;
+    }
 
-	public boolean onTouchEvent(MotionEvent ev) {
-		Log.d("sunzn", "TouchEventChilds | onTouchEvent --> " + TouchEventUtil.getTouchAction(ev.getAction()));
-		return super.onTouchEvent(ev);
+    public boolean onTouchEvent(MotionEvent ev) {
+        Log.d("sunzn", "TouchEventChilds | onTouchEvent --> " + TouchEventUtil.getTouchAction(ev.getAction()));
+        return super.onTouchEvent(ev);
 //		return true;
-	}
+    }
 
 }
