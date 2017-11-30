@@ -68,7 +68,8 @@ public class NetOperater<E extends BaseParam, T extends BaseResult> {
     private Map<String, Object> parseParam(Class<?> c, Map<String, Object> map, Object obj) throws IllegalArgumentException, IllegalAccessException, InstantiationException {
         Field[] declaredFields = c.getDeclaredFields();
         for (Field field : declaredFields) {
-            if (field.getAnnotation(Param.class) != null) {
+            if (field.getAnnotation(Param.class) != null) {  //该属性的Param注解
+//                field.isAnnotationPresent(Param.class)   //判断是否被@Param注解
                 if (!field.isAccessible()) {
                     field.setAccessible(true);
                 }
@@ -83,6 +84,7 @@ public class NetOperater<E extends BaseParam, T extends BaseResult> {
 //                    value = field.get(obj);
 //                }
                 value = field.get(obj);
+                //field.set(obj,value);
                 map.put(key, value);
             }
         }

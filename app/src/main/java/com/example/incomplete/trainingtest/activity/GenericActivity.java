@@ -17,6 +17,8 @@ import com.example.incomplete.trainingtest.testextends.TestChildClass;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -25,7 +27,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
- * 范型测试
+ * 范型测试，包括反射，
  */
 
 public class GenericActivity extends AppCompatActivity {
@@ -64,6 +66,9 @@ public class GenericActivity extends AppCompatActivity {
          */
 
         testClass();
+
+
+        reflect();
 
 
     }
@@ -107,12 +112,14 @@ public class GenericActivity extends AppCompatActivity {
         Log.e("result", realResult.starcraft.INC);
 
 
+
     }
 
     public void testClass() {
         TestChildClass childClass = new TestChildClass();
 
     }
+
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     public void testOkHttp() {
@@ -126,6 +133,29 @@ public class GenericActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+
+    /**
+     * 测试反射的
+     *
+     *  I/medify is public//: type is String//name isname
+        I/medify is public static//: type is int//name ischildInt
+     */
+
+    public void reflect() {
+
+        Class testClass = TestChildClass.class;
+        Field[] fields = testClass.getDeclaredFields();
+        for (Field field:fields){
+            String medify= Modifier.toString(field.getModifiers());
+            String type=field.getType().getSimpleName();
+            String name=field.getName();
+
+            Log.i("medify is "+medify+"// ","type is "+type+"//"+"name is"+name);
+
+        }
+
 
     }
 

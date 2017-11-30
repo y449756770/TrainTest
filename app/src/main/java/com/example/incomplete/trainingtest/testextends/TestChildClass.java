@@ -17,8 +17,9 @@ import android.util.Log;
  */
 
 public class TestChildClass extends TestFatherClass {
-    static int childInt;
+    public static int childInt;
     public String name;
+    private String  age;
 
     public static void fatherStaticMethod() {
         Log.i("child", "fatherMethod");

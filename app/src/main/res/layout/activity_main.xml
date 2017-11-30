@@ -103,7 +103,6 @@
             android:textSize="16sp"/>
 
 
-
         <Button
             android:id="@+id/btn_dial"
             android:layout_width="match_parent"
@@ -113,6 +112,119 @@
             android:layout_marginTop="15dp"
             android:text="各种自定义刻度盘"
             android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/btn_design"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:text="设计模式"
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/btn_md"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:text="MetialDesign"
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/btn_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:text="滑动"
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/btn_weibo_tab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:text="模仿微博的Tab"
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/btn_scroll_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:text="滑动卡片"
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/btn_custom_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:text="各种自定义View"
+            android:textSize="16sp"/>
+
+
+        <Button
+            android:id="@+id/btn_drag_view_helper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:text="ViewGragHelper"
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/btn_tip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:text="右下角的tips"
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/btn_window"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:text="Window的展示"
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/btn_jni"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:text="jni测试"
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/btn_objectAnimater"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:text="属性动画"
+            android:textSize="16sp"/>
+
+
 
 
     </LinearLayout>

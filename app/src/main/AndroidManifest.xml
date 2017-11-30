@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.example.incomplete.trainingtest">
 
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -28,6 +30,38 @@
         <activity android:name=".activity.DialActivity">
         </activity>
         <activity android:name=".activity.WeatherDialActivity">
+        </activity>
+        <activity android:name=".activity.DesignActivity">
+        </activity>
+        <activity android:name=".activity.ConstraitActivity">
+        </activity>
+        <activity android:name=".activity.MetialDesignActivity">
+        </activity>
+        <activity android:name=".activity.ScrollActivity">
+        </activity>
+        <activity android:name=".activity.WeiboTABActivity">
+        </activity>
+        <activity android:name=".activity.BaseActivity">
+        </activity>
+        <activity android:name=".swipeback.SwipeBackActivity">
+        </activity>
+        <activity android:name=".swipeback.SwipeBackAndroidActivity">
+        </activity>
+        <activity android:name=".activity.ArcActivity">
+        </activity>
+        <activity android:name=".activity.CardActivity">
+        </activity>
+        <activity android:name=".activity.CustomTrainingActivity">
+        </activity>
+        <activity android:name=".activity.ViewGragActivity">
+        </activity>
+        <activity android:name=".activity.TipActivity">
+        </activity>
+        <activity android:name=".activity.WindowActivity">
+        </activity>
+        <activity android:name=".activity.JniActivity">
+        </activity>
+        <activity android:name=".activity.ObjectAnimaterActivity">
         </activity>
     </application>
 

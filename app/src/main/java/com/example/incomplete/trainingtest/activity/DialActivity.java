@@ -18,6 +18,8 @@ import android.widget.TextView;
 import com.example.incomplete.trainingtest.R;
 import com.example.incomplete.trainingtest.view.RoundProgressBar;
 
+//自定义View练习
+
 public class DialActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button btn_trust;
@@ -27,6 +29,9 @@ public class DialActivity extends AppCompatActivity implements View.OnClickListe
      * 天气仪表盘
      */
     Button btn_weather_dial;
+
+    Button btn_arc_test;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +47,10 @@ public class DialActivity extends AppCompatActivity implements View.OnClickListe
 
         btn_weather_dial = (Button) findViewById(R.id.btn_weather_dial);
         btn_weather_dial.setOnClickListener(this);
+
+
+        btn_arc_test = (Button) findViewById(R.id.btn_arc_test);
+        btn_arc_test.setOnClickListener(this);
 
 
     }
@@ -64,6 +73,13 @@ public class DialActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_weather_dial:  //天气仪表盘
                 Intent intentWeather = new Intent(DialActivity.this, WeatherDialActivity.class);
                 startActivity(intentWeather);
+
+
+                break;
+
+            case R.id.btn_arc_test:  //天气仪表盘
+                Intent intentArc = new Intent(DialActivity.this, ArcActivity.class);
+                startActivity(intentArc);
 
 
                 break;

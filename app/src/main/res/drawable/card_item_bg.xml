@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- shape 节点配置的是图形的形式，主要包括方形、圆形等，上边代码为方形 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle" >
+
+    <gradient
+        android:angle="270"
+        android:endColor="@color/white"
+        android:startColor="@color/white" />
+
+    <stroke
+        android:width="0.5dp"
+        android:color="@color/divide_tab" />
+
+    <corners
+        android:radius="5dp" />
+
+</shape>

@@ -2,15 +2,33 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId "com.example.incomplete.trainingtest"
-        minSdkVersion 15
+        minSdkVersion 20
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            moduleName "app" // <-- This is the name of my C++ module!
+            cFlags "-DANDROID_NDK " // Define some macros
+            ldLibs "EGL", "GLESv3", "dl", "log", "z", "m"      // Link with these libraries!
+            stl "stlport_shared"
+//            abiFilters "armeabi","armeabi-v7a","x86"
+        }
     }
+//新添加
+    sourceSets {
+        main {
+            jni.srcDirs = []
+            jniLibs.srcDirs 'src/main/libs'
+        }
+    }
+
+    //新添加
+
     buildTypes {
         release {
             minifyEnabled false
@@ -19,16 +37,23 @@ android {
     }
 }
 
+
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile files('libs/gson-2.1.jar')
+    compile files('libs/Baidu_Mtj_3.7.6.1.jar')
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:recyclerview-v7:22.2.1'
     compile 'io.reactivex.rxjava2:rxjava:2.1.0'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.squareup.okhttp3:okhttp:3.8.1'
+    compile 'com.android.support:design:23.3.0'
+    compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
+    compile 'pub.devrel:easypermissions:1.0.1'
 }

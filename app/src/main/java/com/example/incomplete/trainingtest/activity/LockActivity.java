@@ -1,20 +1,16 @@
 package com.example.incomplete.trainingtest.activity;
 
-import android.os.AsyncTask;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.incomplete.trainingtest.ProductAndConsume;
 import com.example.incomplete.trainingtest.R;
+import com.example.incomplete.trainingtest.bean.TestWait;
 
-import java.lang.reflect.Array;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -27,8 +23,8 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.concurrent.FutureTask;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -38,9 +34,13 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * 互斥锁test
+ * <p>
+ * synchronied关键字等待/通知机制：是指一个线程A调用了对象O的wait()方法进入等待状态，
+ * 而另一个线程B调用了对象O的notify()或者notifyAll()方法，线程A收到通知后从对象O的wait()方法返回，进而执行后续操作。上述的两个线程通过对象O来完成交互，
+ * 而对象上的wait()和notify()/notifyAll()的关系就如同开关信号一样，用来完成等待方和通知方之间的交互工作。
  */
 
-public class LockActivity extends AppCompatActivity implements View.OnClickListener {
+public class LockActivity extends BaseActivity implements View.OnClickListener {
     Printer printer = new Printer();
     Button reentrantLock;
     Button sync;
@@ -49,6 +49,10 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
     Button callable;
     private String flag[] = {"true"};
     Button porduce_consumer;
+    Button count_down_latch;
+    Button semaphore;
+    Button deadLock;
+
 
     private static ConcurrentLinkedQueue<Integer> queue = new ConcurrentLinkedQueue<Integer>();
     private static int count = 2; // 线程个数
@@ -68,15 +72,12 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
         }
     };
 
-    private static final BlockingQueue<Runnable> sPoolWorkQueue =
-            new LinkedBlockingQueue<Runnable>(128);
+    private static final BlockingQueue<Runnable> sPoolWorkQueue = new LinkedBlockingQueue<Runnable>(128);
 
     /**
      * An {@link Executor} that can be used to execute tasks in parallel.
      */
-    public static final Executor THREAD_POOL_EXECUTOR
-            = new ThreadPoolExecutor(CORE_POOL_SIZE, MAXIMUM_POOL_SIZE, KEEP_ALIVE,
-            TimeUnit.SECONDS, sPoolWorkQueue, sThreadFactory);
+    public static final Executor THREAD_POOL_EXECUTOR = new ThreadPoolExecutor(CORE_POOL_SIZE, MAXIMUM_POOL_SIZE, KEEP_ALIVE, TimeUnit.SECONDS, sPoolWorkQueue, sThreadFactory);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +115,26 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
         porduce_consumer = (Button) findViewById(R.id.porduce_consumer);
         porduce_consumer.setOnClickListener(this);
 
+        /**
+         * CountDownLatch闭锁
+         */
+        count_down_latch = (Button) findViewById(R.id.count_down_latch);
+        count_down_latch.setOnClickListener(this);
+
+
+        /**
+         * Semaphore互斥
+         */
+        semaphore = (Button) findViewById(R.id.semaphore);
+        semaphore.setOnClickListener(this);
+
+        /**
+         * 死锁
+         */
+
+        deadLock = (Button) findViewById(R.id.dead_lock);
+        deadLock.setOnClickListener(this);
+
 
     }
 
@@ -121,26 +142,7 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.reentrantLock:
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        printer.printe1();
-                    }
-                }).start();
-
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        printer.printe2();
-                    }
-                }).start();
-
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        printer.printe3();
-                    }
-                }).start();
+                implLock1();
 
                 break;
             case R.id.sync:
@@ -153,14 +155,16 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case R.id.wait:
-                NotifyThread notifyThread = new NotifyThread("notify01");
-                WaitThread waitThread01 = new WaitThread("waiter01");
-                WaitThread waitThread02 = new WaitThread("waiter02");
-                WaitThread waitThread03 = new WaitThread("waiter03");
-                notifyThread.start();
-                waitThread01.start();
-                waitThread02.start();
-                waitThread03.start();
+//                NotifyThread notifyThread = new NotifyThread("notify01");
+//                WaitThread waitThread01 = new WaitThread("waiter01");
+//                WaitThread waitThread02 = new WaitThread("waiter02");
+//                WaitThread waitThread03 = new WaitThread("waiter03");
+//                notifyThread.start();
+//                waitThread01.start();
+//                waitThread02.start();
+//                waitThread03.start();
+
+                testWait();
 
                 break;
             case R.id.consumer: //消费者模式
@@ -205,9 +209,32 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
  * 采用CAS操作，来保证元素的一致性。
  */
             case R.id.porduce_consumer: //消费者模式
-                testProducerConsumer();
+//                testProducerConsumer();
+
+                implLock2();
 
                 break;
+
+            case R.id.count_down_latch:
+                try {
+                    testCountDownLatch();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                break;
+
+            case R.id.semaphore:
+
+                testSemaPhore();
+
+                break;
+
+            case R.id.dead_lock:   //死锁
+                while (true) {
+                    testDeadLock();
+
+                }
 
 
         }
@@ -239,13 +266,13 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
 
         public void printe2() {
             lock.lock();
-            if (flag != 2) {
-                try {
-                    c2.await();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+//            if (flag != 2) {
+            try {
+                c2.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+//            }
 
             Log.i("print*****", "" + flag);
             flag = 3;
@@ -255,13 +282,13 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
 
         public void printe3() {
             lock.lock();
-            if (flag != 3) {
-                try {
-                    c3.await();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+//            if (flag != 3) {
+            try {
+                c3.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+//            }
 
             Log.i("print*****", "" + flag);
             flag = 1;
@@ -426,10 +453,11 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
             System.out.println(id + "begin to exec");
             if (id % 2 == 0) {
                 Thread.sleep(2000);
-                return "result of TaskWithResult" + id;
+                return "result of TaskWithResult＊＊＊＊＊＊＊＊＊＊";
 
             } else {
-                return "result of TaskWithResult" + id;
+                Thread.sleep(2000);
+                return "result of TaskWithResult&&&&&&&&&&&&&&&&&";
             }
 
         }
@@ -606,4 +634,297 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
+
+    /**
+     * 用CountDownLatch闭锁实现三个异步任务全部完成才执行后续的操作
+     *
+     * @throws InterruptedException
+     */
+
+    private void testCountDownLatch() throws InterruptedException {
+
+        final CountDownLatch mCount = new CountDownLatch(3);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                Log.i("CountDownLatch", "第一个任务完成");
+                mCount.countDown();
+
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.i("CountDownLatch", "第二个任务完成");
+                mCount.countDown();
+
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.i("CountDownLatch", "第三个任务完成");
+                mCount.countDown();
+
+            }
+        }).start();
+
+        mCount.await();
+
+        Log.i("CountDownLatch", "任务全部完成");
+
+
+    }
+
+    /**
+     * SemaPhore实现简易连接池
+     * <p>
+     * Semaphore中管理着一组虚拟的许可，许可的初始数量可通过构造函数来指定【new Semaphore(1);】，
+     * 执行操作时可以首先获得许可【semaphore.acquire();】，
+     * 并在使用后释放许可【semaphore.release();】。
+     * 如果没有许可，那么acquire方法将会一直阻塞直到有许可（或者直到被终端或者操作超时）
+     */
+
+    private void testSemaPhore() {
+        final Semaphore mSemaphore = new Semaphore(3);
+        final List<Conn> mConns = new ArrayList<>(3);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                /**
+                 * 拿到连接
+                 */
+                try {
+                    mSemaphore.acquire();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Conn c = null;
+                synchronized (mConns) {
+                    c = mConns.remove(0);
+                }
+                System.out.println(Thread.currentThread().getName() + " get a conn " + c);
+
+
+                /**
+                 * 模拟持有连接3秒
+                 */
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                /**
+                 * 释放连接
+                 */
+
+                mConns.add(c);
+                System.out.println(Thread.currentThread().getName() + " release a conn " + c);
+                mSemaphore.release();
+
+
+            }
+        }).start();
+
+
+        for (int i = 0; i < 3; i++) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    /**
+                     * 拿到连接
+                     */
+                    try {
+                        mSemaphore.acquire();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    synchronized (mConns) {
+                        mConns.remove(0);
+                    }
+                    System.out.println(Thread.currentThread().getName() + " get a conn ");
+
+
+                }
+            }).start();
+
+
+        }
+
+
+    }
+
+    /**
+     * 用于模拟连接
+     */
+    class Conn {
+
+    }
+
+    public void implLock1() {
+
+        ReentrantLock lock = new ReentrantLock();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                printer.printe1();
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                printer.printe2();
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                printer.printe3();
+            }
+        }).start();
+
+    }
+
+    public void implLock2() {
+        ProductAndConsume obj = new ProductAndConsume();
+        Product product = new Product(obj);
+        Consume consume = new Consume(obj);
+        new Thread(product).start();
+        new Thread(consume).start();
+
+
+    }
+
+    class Product implements Runnable {
+        ProductAndConsume obj;
+
+        public Product(ProductAndConsume obj) {
+            this.obj = obj;
+        }
+
+        @Override
+        public void run() {
+
+            try {
+                for (int i = 0; i < 10; i++) {
+                    obj.produce();
+
+                }
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+    }
+
+    class Consume implements Runnable {
+        ProductAndConsume obj;
+
+        public Consume(ProductAndConsume obj) {
+            this.obj = obj;
+        }
+
+        @Override
+        public void run() {
+            try {
+                for (int i = 0; i < 10; i++) {
+                    obj.consume();
+                }
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    /**
+     * 同步嵌套是产生死锁的常见情景，从上面的代码中我们可以看出，
+     * 当t1线程拿到锁A后，睡眠2秒，此时线程t2刚好拿到了B锁，接着要获取A锁，但是此时A锁正好被t1线程持有，因此只能等待t1线程释放锁A，
+     * 但遗憾的是在t1线程内又要求获取到B锁，而B锁此时又被t2线程持有，到此结果就是t1线程拿到了锁A同时在等待t2线程释放锁B，而t2线程获取到了锁B也同时在等待t1线程释放锁A，彼此等待也就造成了线程死锁问题。虽然我们现实中一般不会向上面那么写出那样的代码，但是有些更为复杂的场景中，我们可能会遇到这样的问题，比如t1拿了锁之后，因为一些异常情况没有释放锁（死循环），也可能t1拿到一个数据库锁，释放锁的时候抛出了异常，没有释放等等，所以我们应该在写代码的时候多考虑死锁的情况，这样才能有效预防死锁程序的出现。下面我们介绍一下避免死锁的几个常见方法：
+     * 1.避免一个线程同时获取多个锁。
+     * 2.避免在一个资源内占用多个 资源，尽量保证每个锁只占用一个资源。
+     * 3.尝试使用定时锁，使用tryLock(timeout)来代替使用内部锁机制。
+     * 4.对于数据库锁，加锁和解锁必须在一个数据库连接里，否则会出现解锁失败的情况。
+     */
+
+
+    public void testDeadLock() {
+        final String A = "A";
+        final String B = "B";
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                synchronized (A) {
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+                synchronized (B) {
+                    Log.i("B", "B");
+                }
+
+            }
+        }).start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                synchronized (B) {
+                    synchronized (A) {
+                        Log.i("A", "A");
+                    }
+                }
+
+            }
+        }).start();
+    }
+
+
+    /**
+     * 测试
+     * while（true）｛
+     * this.wait();
+     * ｝
+     * 会一直等在wait这句，还是会不断的循环
+     */
+
+    public void testWait() {
+        TestWait mTestWait = new TestWait();
+        TestRunnable mTestRunnable = new TestRunnable(mTestWait);
+        new Thread(mTestRunnable).start();
+    }
+
+    class TestRunnable implements Runnable {
+        TestWait mTestWait;
+
+        public TestRunnable(TestWait mTestWait) {
+            this.mTestWait = mTestWait;
+        }
+
+        @Override
+        public void run() {
+            while (true) {
+                mTestWait.goWait();
+            }
+
+        }
+    }
+
+
 }
+
+

@@ -1,47 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_lock"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.example.incomplete.trainingtest.activity.LockActivity">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/activity_lock"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.example.incomplete.trainingtest.activity.LockActivity">
 
     <Button
         android:id="@+id/reentrantLock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="reentrantLock" />
+        android:text="reentrantLock"/>
 
     <Button
         android:id="@+id/sync"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="sync" />
+        android:text="sync"/>
 
     <Button
         android:id="@+id/wait"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="wait" />
+        android:text="wait"/>
 
     <Button
         android:id="@+id/consumer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="consumer" />
+        android:text="consumer"/>
 
     <Button
         android:id="@+id/callable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="callable" />
+        android:text="callable"/>
 
     <Button
         android:id="@+id/porduce_consumer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="生产者消费者" />
+        android:text="生产者消费者"/>
+
+    <Button
+        android:id="@+id/count_down_latch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="countDownLatch闭锁"/>
+
+    <Button
+        android:id="@+id/semaphore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="semaphore互斥"/>
+
+    <Button
+        android:id="@+id/dead_lock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="死锁"/>
+
 
 
 </LinearLayout>

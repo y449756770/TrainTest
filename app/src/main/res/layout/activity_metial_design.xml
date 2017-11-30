@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.incomplete.trainingtest.activity.MetialDesignActivity">
+
+    <!--AppBarLayout控件,它是继承LinerLayout实现的一个ViewGroup容器组件，是为了Material Design而设计的AppBar，
+       支持手势滑动操作。 默认的AppBarLayout是垂直方向的，它的作用是把AppBarLayout包裹的内容都作为AppBar-->
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--标题栏
+     设置的layout_scrollFlags有如下几种选项：
+     scroll: 所有想滚动出屏幕的view都需要设置这个flag-没有设置这个flag的view将被固定在屏幕顶部。
+     enterAlways: 这个flag让任意向下的滚动都会导致该view变为可见,启用快速“返回模式”。
+     enterAlwaysCollapsed: 当你的视图已经设置minHeight属性又使用此标志时，
+                           你的视图只能以最小高度进入，只有当滚动视图到达顶部时才扩大到完整高度。
+     exitUntilCollapsed: 滚动退出屏幕，最后折叠在顶端。-->
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/color_666666"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+            <Button
+                android:id="@+id/btn_diy"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:background="#80ffffff"
+                android:text="自定义按钮"
+                android:textColor="#000000"
+                android:textSize="11sp"/>
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="首页"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"/>
+
+        </android.support.v7.widget.Toolbar>
+
+        <!--放在Tablayout上面，通过标志位  上滑会隐藏，下滑显示出来-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/orange2"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+        </LinearLayout>
+
+
+        <!--选项卡-->
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#80ffffff"
+            app:tabIndicatorColor="@color/orange2"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/orange2"
+            app:tabTextColor="@android:color/white"/>
+
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <!--SwipeRefreshLayout这里要注意加   app:layout_behavior="@string/appbar_scrolling_view_behavior"
+      这个属性才能实现下拉刷新-->
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/demo_swiperefreshlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+        <!--包含可滑动的布局内容(RecyclerView,NestedScrollView,不支持ListView，ScrollView)
+        必须要设置app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        属性来告知CoordinatorLayout该组件是带有滑动行为的组件,
+        然后CoordinatorLayout在接受到滑动时会通知AppBarLayout中可滑动的Toolbar可以滑出屏幕-->
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <!--这里必须设置这个behavior-->
+
+
+    <!-- <android.support.v4.widget.NestedScrollView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="vertical">
+
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:padding="50dp"
+                 android:text="0"
+                 android:textColor="@color/color_333333"/>
+
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:padding="50dp"
+                 android:text="1"
+                 android:textColor="@color/color_333333"/>
+
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:padding="50dp"
+                 android:text="2"
+                 android:textColor="@color/color_333333"/>
+
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:padding="50dp"
+                 android:text="3"
+                 android:textColor="@color/color_333333"/>
+
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:padding="50dp"
+                 android:text="4"
+                 android:textColor="@color/color_333333"/>
+
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:padding="50dp"
+                 android:text="5"
+                 android:textColor="@color/color_333333"/>
+         </LinearLayout>
+     </android.support.v4.widget.NestedScrollView>-->
+
+
+</android.support.design.widget.CoordinatorLayout>

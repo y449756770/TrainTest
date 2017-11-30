@@ -1,6 +1,5 @@
 package com.example.incomplete.trainingtest.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,7 +9,6 @@ import com.example.incomplete.trainingtest.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.TreeSet;
 
 /**
  * compareTo
@@ -22,7 +20,7 @@ import java.util.TreeSet;
  * 返回负数  倒序存储
  */
 
-public class CollectionActivity extends AppCompatActivity implements View.OnClickListener {
+public class CollectionActivity extends BaseActivity implements View.OnClickListener {
 
     Button btn_test_set;
     ArrayList<Persion> mPersons;
@@ -33,6 +31,7 @@ public class CollectionActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_collection);
         btn_test_set = (Button) findViewById(R.id.btn_test_set);
         btn_test_set.setOnClickListener(this);
+        setSwipeBackEnable(true);
     }
 
     @Override

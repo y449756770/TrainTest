@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -16,17 +15,28 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.incomplete.trainingtest.activity.AsyncActivity;
+import com.example.incomplete.trainingtest.activity.BaseActivity;
+import com.example.incomplete.trainingtest.activity.CardActivity;
 import com.example.incomplete.trainingtest.activity.CollectionActivity;
+import com.example.incomplete.trainingtest.activity.CustomTrainingActivity;
 import com.example.incomplete.trainingtest.activity.DataActivity;
+import com.example.incomplete.trainingtest.activity.DesignActivity;
 import com.example.incomplete.trainingtest.activity.DialActivity;
 import com.example.incomplete.trainingtest.activity.GenericActivity;
+import com.example.incomplete.trainingtest.activity.JniActivity;
 import com.example.incomplete.trainingtest.activity.LeakActivity;
 import com.example.incomplete.trainingtest.activity.LockActivity;
+import com.example.incomplete.trainingtest.activity.MetialDesignActivity;
+import com.example.incomplete.trainingtest.activity.ObjectAnimaterActivity;
+import com.example.incomplete.trainingtest.activity.ScrollActivity;
+import com.example.incomplete.trainingtest.activity.TipActivity;
 import com.example.incomplete.trainingtest.activity.TouchEventActivity;
+import com.example.incomplete.trainingtest.activity.WeiboTABActivity;
+import com.example.incomplete.trainingtest.activity.WindowActivity;
 import com.example.incomplete.trainingtest.activity.rxjavaActivity;
 import com.example.incomplete.trainingtest.view.RoundProgressBar;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
     Button btn_touch;
     Button btn_lock;
     Button btn_collection;
@@ -37,6 +47,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btn_recyler;
     Button btn_rxjava;
     Button btn_dial;
+    Button btn_desiagn;
+    Button btn_md;
+    Button btn_scroll;
+    Button btn_weibo_tab;
+    Button btn_scroll_card;
+    Button btn_custom_view;
+    Button btn_drag_view_helper;
+    Button btn_tip;
+    Button btn_window;
+    Button btn_jni;
+    Button btn_objectAnimater;
 
 
     @Override
@@ -80,6 +101,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_dial.setOnClickListener(this);
 
 
+        btn_desiagn = (Button) findViewById(R.id.btn_design);
+        btn_desiagn.setOnClickListener(this);
+
+        btn_md = (Button) findViewById(R.id.btn_md);
+        btn_md.setOnClickListener(this);
+
+        btn_scroll = (Button) findViewById(R.id.btn_scroll);
+        btn_scroll.setOnClickListener(this);
+
+        btn_weibo_tab = (Button) findViewById(R.id.btn_weibo_tab);
+        btn_weibo_tab.setOnClickListener(this);
+
+        btn_scroll_card = (Button) findViewById(R.id.btn_scroll_card);
+        btn_scroll_card.setOnClickListener(this);
+
+
+        btn_custom_view = (Button) findViewById(R.id.btn_custom_view);
+        btn_custom_view.setOnClickListener(this);
+
+        btn_drag_view_helper = (Button) findViewById(R.id.btn_drag_view_helper);
+        btn_drag_view_helper.setOnClickListener(this);
+
+        btn_tip = (Button) findViewById(R.id.btn_tip);
+        btn_tip.setOnClickListener(this);
+
+        btn_window = (Button) findViewById(R.id.btn_window);
+        btn_window.setOnClickListener(this);
+
+        btn_jni = (Button) findViewById(R.id.btn_jni);
+        btn_jni.setOnClickListener(this);
+
+        btn_objectAnimater=(Button)findViewById(R.id.btn_objectAnimater);
+        btn_objectAnimater.setOnClickListener(this);
+
+
     }
 
     @Override
@@ -114,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intentAsync);
                 break;
 
-            case R.id.btn_generic:  //数据结构
+            case R.id.btn_generic:  //范型
                 Intent intentGeneric = new Intent(MainActivity.this, GenericActivity.class);
                 startActivity(intentGeneric);
                 break;
@@ -132,6 +188,83 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent btn_dialIntent = new Intent(MainActivity.this, DialActivity.class);
                 startActivity(btn_dialIntent);
                 break;
+            case R.id.btn_design://设计模式
+
+                Intent designIntent = new Intent(MainActivity.this, DesignActivity.class);
+                startActivity(designIntent);
+                break;
+
+
+            case R.id.btn_md: //metialDesign
+
+                Intent mdIntent = new Intent(MainActivity.this, MetialDesignActivity.class);
+                startActivity(mdIntent);
+                break;
+
+            case R.id.btn_scroll: //滑动视图
+
+                Intent mScroll = new Intent(MainActivity.this, ScrollActivity.class);
+                startActivity(mScroll);
+                break;
+
+            case R.id.btn_weibo_tab: //模仿微博的Tab
+
+                Intent mWeiboTabb = new Intent(MainActivity.this, WeiboTABActivity.class);
+                startActivity(mWeiboTabb);
+                break;
+
+            case R.id.btn_scroll_card: // 滑动卡片
+
+                Intent mCardIntent = new Intent(MainActivity.this, CardActivity.class);
+                startActivity(mCardIntent);
+                break;
+
+
+            case R.id.btn_custom_view: // 滑动卡片
+
+                Intent mCustomIntent = new Intent(MainActivity.this, CustomTrainingActivity.class);
+                startActivity(mCustomIntent);
+                break;
+
+            case R.id.btn_drag_view_helper: // 拖拽view
+
+                Intent mDragIntent = new Intent(MainActivity.this, CustomTrainingActivity.class);
+                startActivity(mDragIntent);
+                break;
+            case R.id.btn_tip:
+
+                Intent mTipsIntent = new Intent(MainActivity.this, TipActivity.class);
+                startActivity(mTipsIntent);
+
+
+                break;
+
+            case R.id.btn_window:
+
+                Intent mWindowIntent = new Intent(MainActivity.this, WindowActivity.class);
+                startActivity(mWindowIntent);
+
+                break;
+
+            case R.id.btn_jni:
+
+                Intent jniIntent = new Intent(MainActivity.this, JniActivity.class);
+                startActivity(jniIntent);
+
+                break;
+
+
+            case R.id.btn_objectAnimater:
+
+                Intent objectAnimaterIntent = new Intent(MainActivity.this, ObjectAnimaterActivity.class);
+                startActivity(objectAnimaterIntent);
+
+                break;
+
+
+
+
+
 
 
         }
@@ -161,6 +294,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 dialog.dismiss();
             }
         });
+
 
         TextView commit = (TextView) view.findViewById(R.id.edit);
         commit.setOnClickListener(new View.OnClickListener() {

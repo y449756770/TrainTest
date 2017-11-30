@@ -26,14 +26,35 @@ public class TouchEventChilds extends LinearLayout {
 
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         Log.i("sunzn", "TouchEventChilds | onInterceptTouchEvent --> " + TouchEventUtil.getTouchAction(ev.getAction()));
-//        return super.onInterceptTouchEvent(ev);
-        return true;
+        boolean intercepted = false;
+        int x = (int) ev.getX();
+        int y = (int) ev.getY();
+
+        switch (ev.getAction()) {
+
+            case MotionEvent.ACTION_DOWN:
+                intercepted = false;
+                break;
+
+            case MotionEvent.ACTION_MOVE:
+                intercepted = true;
+                break;
+
+
+            case MotionEvent.ACTION_UP:
+                intercepted = false;
+                break;
+
+
+        }
+        return intercepted;
+
     }
 
     public boolean onTouchEvent(MotionEvent ev) {
         Log.d("sunzn", "TouchEventChilds | onTouchEvent --> " + TouchEventUtil.getTouchAction(ev.getAction()));
-        return super.onTouchEvent(ev);
-//		return true;
+//        return super.onTouchEvent(ev);
+        return true;
     }
 
 }

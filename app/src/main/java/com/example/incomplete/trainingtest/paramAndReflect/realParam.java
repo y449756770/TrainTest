@@ -8,7 +8,7 @@ public class RealParam extends BaseParam {
 
     @Param
     public String id;
-    @Param
+    @Param(1)
     public int age;
     @Param
     public String name;
