@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.incomplete.trainingtest">
+    package="com.example.incomplete.trainingtest">
 
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -12,57 +14,39 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.TouchEventActivity"/>
-        <activity android:name=".activity.LockActivity"/>
-        <activity android:name=".activity.CollectionActivity"/>
-        <activity android:name=".activity.DataActivity"/>
-        <activity android:name=".activity.LeakActivity"/>
-        <activity android:name=".activity.AsyncActivity"/>
-        <activity android:name=".activity.GenericActivity"/>
-        <activity android:name=".RecylerActivity"/>
-        <activity android:name=".activity.rxjavaActivity"/>
-        <activity android:name=".activity.ResumeTrustActivity"/>
-        <activity android:name=".activity.DialActivity">
-        </activity>
-        <activity android:name=".activity.WeatherDialActivity">
-        </activity>
-        <activity android:name=".activity.DesignActivity">
-        </activity>
-        <activity android:name=".activity.ConstraitActivity">
-        </activity>
-        <activity android:name=".activity.MetialDesignActivity">
-        </activity>
-        <activity android:name=".activity.ScrollActivity">
-        </activity>
-        <activity android:name=".activity.WeiboTABActivity">
-        </activity>
-        <activity android:name=".activity.BaseActivity">
-        </activity>
-        <activity android:name=".swipeback.SwipeBackActivity">
-        </activity>
-        <activity android:name=".swipeback.SwipeBackAndroidActivity">
-        </activity>
-        <activity android:name=".activity.ArcActivity">
-        </activity>
-        <activity android:name=".activity.CardActivity">
-        </activity>
-        <activity android:name=".activity.CustomTrainingActivity">
-        </activity>
-        <activity android:name=".activity.ViewGragActivity">
-        </activity>
-        <activity android:name=".activity.TipActivity">
-        </activity>
-        <activity android:name=".activity.WindowActivity">
-        </activity>
-        <activity android:name=".activity.JniActivity">
-        </activity>
-        <activity android:name=".activity.ObjectAnimaterActivity">
-        </activity>
+        <activity android:name=".activity.TouchEventActivity" />
+        <activity android:name=".activity.LockActivity" />
+        <activity android:name=".activity.CollectionActivity" />
+        <activity android:name=".activity.DataActivity" />
+        <activity android:name=".activity.LeakActivity" />
+        <activity android:name=".activity.AsyncActivity" />
+        <activity android:name=".activity.GenericActivity" />
+        <activity android:name=".RecylerActivity" />
+        <activity android:name=".activity.rxjavaActivity" />
+        <activity android:name=".activity.ResumeTrustActivity" />
+        <activity android:name=".activity.DialActivity"></activity>
+        <activity android:name=".activity.WeatherDialActivity"></activity>
+        <activity android:name=".activity.DesignActivity"></activity>
+        <activity android:name=".activity.ConstraitActivity"></activity>
+        <activity android:name=".activity.MetialDesignActivity"></activity>
+        <activity android:name=".activity.ScrollActivity"></activity>
+        <activity android:name=".activity.WeiboTABActivity"></activity>
+        <activity android:name=".activity.BaseActivity"></activity>
+        <activity android:name=".swipeback.SwipeBackActivity"></activity>
+        <activity android:name=".swipeback.SwipeBackAndroidActivity"></activity>
+        <activity android:name=".activity.ArcActivity"></activity>
+        <activity android:name=".activity.CardActivity"></activity>
+        <activity android:name=".activity.CustomTrainingActivity"></activity>
+        <activity android:name=".activity.ViewGragActivity"></activity>
+        <activity android:name=".activity.TipActivity"></activity>
+        <activity android:name=".activity.WindowActivity"></activity>
+        <activity android:name=".activity.JniActivity"></activity>
+        <activity android:name=".activity.ObjectAnimaterActivity"></activity>
     </application>
 
 </manifest>
