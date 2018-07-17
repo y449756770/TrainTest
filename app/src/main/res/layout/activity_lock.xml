@@ -60,6 +60,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="死锁"/>
+    <Button
+        android:id="@+id/test_thread"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="测试线程共享对象"
+        />
+
+
+    <Button
+        android:id="@+id/test_simple_consume_produce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="测试简单生产者消费者"
+        />
+
+
 
 
 

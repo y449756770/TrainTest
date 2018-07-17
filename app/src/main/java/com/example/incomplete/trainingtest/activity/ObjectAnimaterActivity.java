@@ -13,10 +13,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.incomplete.trainingtest.R;
+import com.example.incomplete.trainingtest.bean.Evaluator;
 import com.example.incomplete.trainingtest.utiles.ViewTools;
+import com.example.incomplete.trainingtest.view.NewCreditSesameView;
 import com.example.incomplete.trainingtest.view.RoundProgress;
 import com.example.incomplete.trainingtest.view.SaleProgressView;
 import com.nineoldandroids.view.ViewHelper;
@@ -35,6 +38,12 @@ public class ObjectAnimaterActivity extends AppCompatActivity implements View.On
     private int mLastX;
     private int mLastY;
 
+    private Button btnOpen;  //用于演示EditText的宽度变化
+    private EditText edOpen;
+
+    private NewCreditSesameView creditView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +56,10 @@ public class ObjectAnimaterActivity extends AppCompatActivity implements View.On
         show = (Button) findViewById(R.id.show);
         hide.setOnClickListener(this);
         show.setOnClickListener(this);
+        btnOpen = (Button) findViewById(R.id.btn_open);
+        btnOpen.setOnClickListener(this);
+        edOpen = (EditText) findViewById(R.id.ed_open);
+        creditView = (NewCreditSesameView) findViewById(R.id.newCreditView);
 
 
         //应用程序App区域宽高等尺寸获取（包括contentView和appBar）
@@ -62,12 +75,14 @@ public class ObjectAnimaterActivity extends AppCompatActivity implements View.On
         Rect rect1 = new Rect();
         getWindow().findViewById(Window.ID_ANDROID_CONTENT).getDrawingRect(rect1);
 
+        creditView.setSesameValues(450);
 
-        performAnimion();
+//        performAnimion();
 
-        saleProgressbar();
+//        saleProgressbar();
 
         performValueAnimation();
+
 
 //        fab.setOnClickListener(this);
 
@@ -100,6 +115,19 @@ public class ObjectAnimaterActivity extends AppCompatActivity implements View.On
                 mLastX = x;
                 mLastY = y;
                 return true;
+            }
+        });
+
+        /**
+         *
+         */
+        ValueAnimator animator = ValueAnimator.ofObject(new Evaluator(), 0, 100);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                //在这里得到动态变化的value
+                float value = (float) animation.getAnimatedValue();
+
             }
         });
 
@@ -205,6 +233,13 @@ public class ObjectAnimaterActivity extends AppCompatActivity implements View.On
                 ObjectAnimator.ofFloat(fab, "translationX", 0).setDuration(200).start();
 
                 break;
+            case R.id.btn_open:
+                int currentWidth = edOpen.getLayoutParams().width;
+
+                porformAnim(edOpen, currentWidth, currentWidth + 300);
+
+
+                break;
 
 
         }
@@ -212,5 +247,40 @@ public class ObjectAnimaterActivity extends AppCompatActivity implements View.On
 
     }
 
+    /**
+     * 使得view的宽度变成目标宽度
+     *
+     * @param view
+     * @param width
+     * @param targetWidth
+     */
 
+
+    public void porformAnim(final View view, int width, final int targetWidth) {
+
+
+        ValueAnimator valueAnimator = ValueAnimator.ofInt(width, targetWidth);
+        valueAnimator.setDuration(5000);
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                int targetValue = (Integer) animation.getAnimatedValue();
+                Log.i("currentValueIs:", "" + targetValue);
+                view.getLayoutParams().width = targetWidth;
+                view.requestLayout();
+
+
+            }
+        });
+        valueAnimator.start();
+
+
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
 }

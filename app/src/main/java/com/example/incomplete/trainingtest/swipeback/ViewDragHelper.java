@@ -602,7 +602,7 @@ public class ViewDragHelper {
      * the motion until it returns false. If this method returns false there is
      * no further work to do to complete the movement.
      * <p>
-     * This operation does not count as a capture event, though
+     * This operation does not ThreadOpt as a capture event, though
      * {@link #getCapturedView()} will still report the sliding view while the
      * slide is in progress.
      * </p>
@@ -1339,7 +1339,7 @@ public class ViewDragHelper {
     /**
      * Check if we've crossed a reasonable touch slop for the given child view.
      * If the child cannot be dragged along the horizontal or vertical axis,
-     * motion along that axis will not count toward the slop check.
+     * motion along that axis will not ThreadOpt toward the slop check.
      *
      * @param child Child to check
      * @param dx Motion since initial position along X axis

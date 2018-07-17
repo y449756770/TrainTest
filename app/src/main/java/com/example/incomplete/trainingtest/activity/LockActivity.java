@@ -7,7 +7,9 @@ import android.widget.Button;
 
 import com.example.incomplete.trainingtest.ProductAndConsume;
 import com.example.incomplete.trainingtest.R;
+import com.example.incomplete.trainingtest.bean.SimpleProduceConsumer;
 import com.example.incomplete.trainingtest.bean.TestWait;
+import com.example.incomplete.trainingtest.bean.ThreadOpt;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,6 +54,9 @@ public class LockActivity extends BaseActivity implements View.OnClickListener {
     Button count_down_latch;
     Button semaphore;
     Button deadLock;
+    Button test_thread;
+
+    Button test_simple_consume_produce;//测试简单消费者和生产者模式
 
 
     private static ConcurrentLinkedQueue<Integer> queue = new ConcurrentLinkedQueue<Integer>();
@@ -74,10 +79,8 @@ public class LockActivity extends BaseActivity implements View.OnClickListener {
 
     private static final BlockingQueue<Runnable> sPoolWorkQueue = new LinkedBlockingQueue<Runnable>(128);
 
-    /**
-     * An {@link Executor} that can be used to execute tasks in parallel.
-     */
     public static final Executor THREAD_POOL_EXECUTOR = new ThreadPoolExecutor(CORE_POOL_SIZE, MAXIMUM_POOL_SIZE, KEEP_ALIVE, TimeUnit.SECONDS, sPoolWorkQueue, sThreadFactory);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,6 +137,16 @@ public class LockActivity extends BaseActivity implements View.OnClickListener {
 
         deadLock = (Button) findViewById(R.id.dead_lock);
         deadLock.setOnClickListener(this);
+
+
+        test_thread = (Button) findViewById(R.id.test_thread);
+        test_thread.setOnClickListener(this);
+
+        /**
+         * 测试简单生茶着-消费者模式
+         */
+        test_simple_consume_produce = (Button) findViewById(R.id.test_simple_consume_produce);
+        test_simple_consume_produce.setOnClickListener(this);
 
 
     }
@@ -235,6 +248,49 @@ public class LockActivity extends BaseActivity implements View.OnClickListener {
                     testDeadLock();
 
                 }
+            case R.id.test_thread:   //测试线程对象
+                //http://blog.csdn.net/ghsau/article/details/7433673
+                Runnable runnable = new Runnable() {
+                    ThreadOpt opt = new ThreadOpt();//使得多个线程共享同一个对象
+
+                    @Override
+                    public void run() {
+
+                        opt.count();
+
+                    }
+                };
+                for (int i = 0; i <= 10; i++) {
+                    new Thread(runnable).start();
+                }
+                break;
+
+            case R.id.test_simple_consume_produce:   //测试简单生产者-消费者模式
+//                Log.i("test","test");
+//                SimpleProduceConsumer plate = new SimpleProduceConsumer();
+//                for(int i = 0; i < 10; i++) {
+//                    new Thread(new SimpleProduceConsumer.getEggRunnable(plate)).start();
+//                    new Thread(new SimpleProduceConsumer.putEggRunnable(plate)).start();
+//                }
+
+                // 创建线程对象
+                YieldThread t11 = new YieldThread("t1");
+                YieldThread t22 = new YieldThread("t2");
+                // 启动线程
+                t11.start();
+                t22.start();
+                // 主线程休眠100毫秒
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                // 终止线程
+                t11.interrupt();
+                t22.interrupt();
+
+
+                break;
 
 
         }
@@ -529,7 +585,7 @@ public class LockActivity extends BaseActivity implements View.OnClickListener {
 //        long timeStart = System.currentTimeMillis();
 //        ExecutorService es = Executors.newFixedThreadPool(4);
 //        offer();
-//        for (int i = 0; i < count; i++) {
+//        for (int i = 0; i < ThreadOpt; i++) {
 //            es.submit(new Poll());
 //        }
 //        try {
@@ -924,7 +980,30 @@ public class LockActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
+    class YieldThread extends Thread {
+        int i = 0;
 
+        public YieldThread(String name) {
+            super(name);
+        }
+
+        public void run() {
+            synchronized (YieldThread.class) { //这样的话t1和t2之间有一条线程会一直执行，表明yield不会释放锁
+                while (!isInterrupted()) {
+                    System.out.println(getName() + "执行了" + ++i + "次");
+                    if (i % 10 == 0) {// 当i能对10整除时，则让步
+                        Thread.yield();
+                    }
+                }
+
+
+            }
+
+
+        }
+
+
+    }
 }
 
 

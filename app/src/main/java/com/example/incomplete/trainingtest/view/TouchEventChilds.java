@@ -21,7 +21,22 @@ public class TouchEventChilds extends LinearLayout {
     public boolean dispatchTouchEvent(MotionEvent ev) {
         Log.e("sunzn", "TouchEventChilds | dispatchTouchEvent --> " + TouchEventUtil.getTouchAction(ev.getAction()));
         return super.dispatchTouchEvent(ev);
-//		return true;
+        /**
+         * 内部拦截规则
+         */
+//        switch (ev.getAction()) {
+//            case MotionEvent.ACTION_DOWN:
+//                getParent().requestDisallowInterceptTouchEvent(true);
+//                break;
+//            case MotionEvent.ACTION_MOVE:
+//                getParent().requestDisallowInterceptTouchEvent(false);
+//                break;
+//            case MotionEvent.ACTION_UP:
+//                break;
+//
+//
+//        }
+//        return super.dispatchTouchEvent(ev);
     }
 
     public boolean onInterceptTouchEvent(MotionEvent ev) {
@@ -48,13 +63,23 @@ public class TouchEventChilds extends LinearLayout {
 
         }
         return intercepted;
+//        return super.onInterceptTouchEvent(ev);
 
     }
 
     public boolean onTouchEvent(MotionEvent ev) {
         Log.d("sunzn", "TouchEventChilds | onTouchEvent --> " + TouchEventUtil.getTouchAction(ev.getAction()));
-//        return super.onTouchEvent(ev);
-        return true;
+
+//        return true;
+        /**
+         * 外部拦截要消耗move事件
+         */
+//        switch (ev.getAction()) {
+//            case MotionEvent.ACTION_MOVE:
+//                return true;
+//
+//        }
+        return super.onTouchEvent(ev);
     }
 
 }

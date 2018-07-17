@@ -18,6 +18,7 @@ import com.example.incomplete.trainingtest.activity.AsyncActivity;
 import com.example.incomplete.trainingtest.activity.BaseActivity;
 import com.example.incomplete.trainingtest.activity.CardActivity;
 import com.example.incomplete.trainingtest.activity.CollectionActivity;
+import com.example.incomplete.trainingtest.activity.ConstraitActivity;
 import com.example.incomplete.trainingtest.activity.CustomTrainingActivity;
 import com.example.incomplete.trainingtest.activity.DataActivity;
 import com.example.incomplete.trainingtest.activity.DesignActivity;
@@ -33,6 +34,7 @@ import com.example.incomplete.trainingtest.activity.TipActivity;
 import com.example.incomplete.trainingtest.activity.TouchEventActivity;
 import com.example.incomplete.trainingtest.activity.WeiboTABActivity;
 import com.example.incomplete.trainingtest.activity.WindowActivity;
+import com.example.incomplete.trainingtest.activity.XFormodeActivity;
 import com.example.incomplete.trainingtest.activity.rxjavaActivity;
 import com.example.incomplete.trainingtest.view.RoundProgressBar;
 
@@ -58,6 +60,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     Button btn_window;
     Button btn_jni;
     Button btn_objectAnimater;
+    Button btn_xfermode;
+    Button btn_constraintlayout;
 
 
     @Override
@@ -132,8 +136,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btn_jni = (Button) findViewById(R.id.btn_jni);
         btn_jni.setOnClickListener(this);
 
-        btn_objectAnimater=(Button)findViewById(R.id.btn_objectAnimater);
+        btn_objectAnimater = (Button) findViewById(R.id.btn_objectAnimater);
         btn_objectAnimater.setOnClickListener(this);
+
+        btn_xfermode = (Button) findViewById(R.id.btn_xfermode);
+        btn_xfermode.setOnClickListener(this);
+
+        btn_constraintlayout = (Button) findViewById(R.id.btn_constraintlayout);
+        btn_constraintlayout.setOnClickListener(this);
 
 
     }
@@ -184,7 +194,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 startActivity(intentRxJava);
                 break;
 
-            case R.id.btn_dial:  //rxjava
+            case R.id.btn_dial:  //各种仪表盘
                 Intent btn_dialIntent = new Intent(MainActivity.this, DialActivity.class);
                 startActivity(btn_dialIntent);
                 break;
@@ -261,10 +271,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
                 break;
 
+            case R.id.btn_xfermode:
 
+                Intent xfermodeIntent = new Intent(MainActivity.this, XFormodeActivity.class);
+                startActivity(xfermodeIntent);
 
+                break;
 
+            case R.id.btn_constraintlayout:
 
+                Intent conIntent = new Intent(MainActivity.this, ConstraitActivity.class);
+                startActivity(conIntent);
+
+                break;
 
 
         }

@@ -18,9 +18,7 @@ import com.example.incomplete.trainingtest.R;
 import java.text.DecimalFormat;
 
 /**
- * Created by zh on 2017/8/19.
- *
- *
+ * Created by liuyong on 2017/8/19.
  * https://mp.weixin.qq.com/s/72cSlz9HJq_bNFziOtjwbQ
  */
 public class SaleProgressView extends View {
@@ -68,19 +66,19 @@ public class SaleProgressView extends View {
 
     public SaleProgressView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initAttrs(context,attrs);
+        initAttrs(context, attrs);
         initPaint();
     }
 
     private void initAttrs(Context context, AttributeSet attrs) {
-        TypedArray ta = context.obtainStyledAttributes(attrs,R.styleable.SaleProgressView);
-        sideColor = ta.getColor(R.styleable.SaleProgressView_sideColor,0xffff3c32);
-        textColor = ta.getColor(R.styleable.SaleProgressView_textColor1,0xffff3c32);
-        sideWidth = ta.getDimension(R.styleable.SaleProgressView_sideWidth,dp2px(2));
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SaleProgressView);
+        sideColor = ta.getColor(R.styleable.SaleProgressView_sideColor, 0xffff3c32);
+        textColor = ta.getColor(R.styleable.SaleProgressView_textColor1, 0xffff3c32);
+        sideWidth = ta.getDimension(R.styleable.SaleProgressView_sideWidth, dp2px(2));
         overText = ta.getString(R.styleable.SaleProgressView_overText);
         nearOverText = ta.getString(R.styleable.SaleProgressView_nearOverText);
-        textSize = ta.getDimension(R.styleable.SaleProgressView_textSize1,sp2px(16));
-        isNeedAnim = ta.getBoolean(R.styleable.SaleProgressView_isNeedAnim,true);
+        textSize = ta.getDimension(R.styleable.SaleProgressView_textSize1, sp2px(16));
+        isNeedAnim = ta.getBoolean(R.styleable.SaleProgressView_isNeedAnim, true);
         ta.recycle();
     }
 
@@ -88,7 +86,7 @@ public class SaleProgressView extends View {
         sidePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         sidePaint.setStyle(Paint.Style.STROKE);
         sidePaint.setStrokeWidth(sideWidth);
-        sidePaint.setColor(sideColor);
+        sidePaint.setColor(getResources().getColor(R.color.black));
 
         srcPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
@@ -125,7 +123,7 @@ public class SaleProgressView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if(!isNeedAnim){
+        if (!isNeedAnim) {
             progressCount = currentCount;
         }
 
@@ -141,10 +139,10 @@ public class SaleProgressView extends View {
         drawText(canvas);
 
         //这里是为了演示动画方便，实际开发中进度只会增加
-        if(progressCount!=currentCount){
-            if(progressCount<currentCount){
+        if (progressCount != currentCount) {
+            if (progressCount < currentCount) {
                 progressCount++;
-            }else{
+            } else {
                 progressCount--;
             }
             postInvalidate();
@@ -169,6 +167,9 @@ public class SaleProgressView extends View {
         bgCanvas.drawRoundRect(bgRectF, radius, radius, srcPaint);
 
         srcPaint.setXfermode(mPorterDuffXfermode);
+        /**
+         * SRC-IN 相交的地方画原图
+         */
         bgCanvas.drawBitmap(bgSrc, null, bgRectF, srcPaint);
 
         canvas.drawBitmap(bgBitmap, 0, 0, null);
@@ -183,7 +184,7 @@ public class SaleProgressView extends View {
         Bitmap fgBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas fgCanvas = new Canvas(fgBitmap);
         if (fgSrc == null) {
-            fgSrc = BitmapFactory.decodeResource(getResources(),R.mipmap.fg);
+            fgSrc = BitmapFactory.decodeResource(getResources(), R.mipmap.fg);
         }
         fgCanvas.drawRoundRect(
                 new RectF(sideWidth, sideWidth, (width - sideWidth) * scale, height - sideWidth),
@@ -216,6 +217,9 @@ public class SaleProgressView extends View {
         } else {
             textCanvas.drawText(overText, width / 2 - overTextWidth / 2, baseLineY, textPaint);
         }
+        /**
+         * 已经扫过的进度是白色
+         */
 
         textPaint.setXfermode(mPorterDuffXfermode);
         textPaint.setColor(Color.WHITE);
