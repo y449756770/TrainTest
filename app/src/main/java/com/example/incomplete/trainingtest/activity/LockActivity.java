@@ -250,19 +250,31 @@ public class LockActivity extends BaseActivity implements View.OnClickListener {
                 }
             case R.id.test_thread:   //测试线程对象
                 //http://blog.csdn.net/ghsau/article/details/7433673
-                Runnable runnable = new Runnable() {
-                    ThreadOpt opt = new ThreadOpt();//使得多个线程共享同一个对象
+//                Runnable runnable = new Runnable() {
+//                    ThreadOpt opt = new ThreadOpt();//使得多个线程共享同一个对象
+//
+//                    @Override
+//                    public void run() {
+//
+//                        opt.count();
+//
+//                    }
+//                };
+//                for (int i = 0; i <= 10; i++) {
+//                    new Thread(runnable).start();
+//                }
+                MyThread myThread = new MyThread();
+                Thread a = new Thread(myThread, "A");
+                Thread b = new Thread(myThread, "B");
+                Thread c = new Thread(myThread, "C");
+                Thread d = new Thread(myThread, "D");
+                Thread e1 = new Thread(myThread, "E");
+                a.start();
+                b.start();
+                c.start();
+                d.start();
+                e1.start();
 
-                    @Override
-                    public void run() {
-
-                        opt.count();
-
-                    }
-                };
-                for (int i = 0; i <= 10; i++) {
-                    new Thread(runnable).start();
-                }
                 break;
 
             case R.id.test_simple_consume_produce:   //测试简单生产者-消费者模式
@@ -1003,6 +1015,17 @@ public class LockActivity extends BaseActivity implements View.OnClickListener {
         }
 
 
+    }
+
+    class MyThread extends Thread {
+        private int count = 5;
+
+        @Override
+        public void run() {
+            super.run();
+            count--;
+            System.out.println(" 由" + this.currentThread().getName() + " 计算count=" + count);
+        }
     }
 }
 
